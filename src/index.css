@@ -25,7 +25,7 @@ code {
 }
 
 .list {
-    flex-grow: 1;
+    width: calc(50% - 24px);
     border: 1px solid #eaeaea;
     margin: 32px 12px;
 }
@@ -70,4 +70,27 @@ li {
 
 li input {
     margin-right: 12px;
+}
+
+.done li {
+    color: darkgrey;
+    text-decoration-line: underline;
+}
+
+.list-item {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    text-align: left;
+}
+
+.list-item__text {
+    width: 100%;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.checkbox {
+    cursor: pointer;
 }

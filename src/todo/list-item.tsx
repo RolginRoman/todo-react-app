@@ -15,8 +15,8 @@ export function ListItem(props: ListItemProps) {
 
     return (
         <div className={'list-item'}>
-            {props.check ? <input type='checkbox' onChange={handleCheckbox}/> : <i></i>}
-            {props.item.text}
+            {props.check ? <input type='checkbox' className={'checkbox'} onChange={handleCheckbox}/> : null}
+            <span className={'list-item__text'} title={props.item.text}>{props.item.text}</span>
         </div>
     )
 }

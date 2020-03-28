@@ -5,6 +5,8 @@ import {ListItem} from "./list-item";
 interface TodoListProps {
     readonly items: Task[];
     readonly check?: (task: Task) => void;
+    readonly header?: string;
+    readonly className?: string;
 }
 
 interface TodoListState {
@@ -12,13 +14,10 @@ interface TodoListState {
 
 export class TodoList extends React.Component<TodoListProps, TodoListState> {
 
-    constructor(props: TodoListProps) {
-        super(props);
-    }
-
     render() {
         return (
-            <div className={'list'}>
+            <div className={`list ${this.props.className}`}>
+                {this.props.header ? <h2>{this.props.header}</h2> : null}
                 <ul>
                     {this.props.items.map(item =>
                         <li key={item.text}>

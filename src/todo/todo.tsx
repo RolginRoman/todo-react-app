@@ -39,8 +39,8 @@ class Todo extends React.Component<TodoProps, TodoState> {
                     <button className={'create-button'} onClick={this.createItem}>Add</button>
                 </div>
                 <div className={'dashboard'}>
-                    <TodoList check={this.check} items={this.props.currentTasks}/>
-                    <TodoList items={this.props.done}/>
+                    <TodoList className={'todo'} header={'Todo'} check={this.check} items={this.props.currentTasks}/>
+                    <TodoList className={'done'} header={'Done'} items={this.props.done}/>
                 </div>
             </div>
         )
@@ -59,7 +59,7 @@ class Todo extends React.Component<TodoProps, TodoState> {
     }
 
     private createItem() {
-        if (this.state.taskText === '') {
+        if (!this.state.taskText || this.state.taskText === '') {
             alert('please add text');
             return;
         }
