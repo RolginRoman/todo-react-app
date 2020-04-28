@@ -1,47 +1,30 @@
-import React from 'react';
-import './App.css';
-import Todo from "./todo/todo";
-import {Task} from "./model/todo.model";
+import React from "react";
+import "./App.css";
 
-interface AppState {
-    currentTasks: Task[];
-    done: Task[];
-}
+import { createStore } from "redux";
+import reducerApp from "./reducers/reducers";
+import { Provider } from "react-redux";
 
-export class App extends React.Component<any, AppState> {
+import Input from "./containers/Input";
+import List from "./containers/List";
 
-    // @ts-ignore
-    constructor(props) {
-        super(props);
-        this.add = this.add.bind(this);
-        this.check = this.check.bind(this);
-        this.state = {
-            currentTasks: [],
-            done: [],
-        }
-    }
+export const store = createStore(reducerApp);
 
-    render(): React.ReactNode {
-        return (
-            <div className="App">
-                <Todo add={this.add} check={this.check} currentTasks={this.state.currentTasks}
-                      done={this.state.done}></Todo>
-            </div>
-        );
-    }
+export class App extends React.Component {
+  render(): React.ReactNode {
+    return (
+      <Provider store={store}>
+        <div className={"todo"}>
+          <Input />
 
-    public add(task: Task): void {
-        this.setState({
-            currentTasks: [...this.state.currentTasks, task]
-        })
-    }
-
-    public check(task: Task): void {
-        this.setState({
-            currentTasks: this.state.currentTasks.filter(current => current.id !== task.id),
-            done: [...this.state.done, task]
-        })
-    }
+          <div className={"dashboard"}>
+            <List className={"todo"} header={"Todo"} finishList={false} />
+            <List className={"done"} header={"Done"} finishList={true} />
+          </div>
+        </div>
+      </Provider>
+    );
+  }
 }
 
 export default App;
